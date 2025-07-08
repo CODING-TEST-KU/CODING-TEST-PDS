@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class bj11651 {
     //bubble 정렬 버젼
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
         int[] x = new int[n];

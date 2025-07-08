@@ -23,6 +23,7 @@ public class bj10815 {
             targets[i] = scan.nextInt();
         }
 
+        // 결과 출력
         for (int i = 0; i < targets.length; i++) {
             System.out.print(search(targets[i]));
             if (i != targets.length - 1) System.out.print(" ");

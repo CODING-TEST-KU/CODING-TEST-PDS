@@ -7,8 +7,7 @@ public class bj18808 {
     static int n, m;
     static int[][] laptop;
 
-    public static void main(String args[]) {
-
+    public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
 

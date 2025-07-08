@@ -10,6 +10,7 @@ public class bj2805 {
         int[] trees = new int[n];
         int end = 0;
 
+        // 나무 길이 입력받으면서 가장 긴 나무 찾기(end에 저장)
         for (int i = 0; i < n; i++) {
             trees[i] = scan.nextInt();
             if (end < trees[i]) end = trees[i];
