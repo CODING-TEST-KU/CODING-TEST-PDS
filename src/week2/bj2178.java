@@ -60,9 +60,5 @@ public class bj2178 {
                 }
             }
         }
-
-
     }
-
-
 }
