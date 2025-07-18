@@ -37,7 +37,13 @@ public class bj14891 {
             findConnection(wheelNum);
             //todo 시작 톱니바퀴를 기준으로 연쇄적으로 회전 rotate()
             rotate(wheelNum, dir);
+            for (int ii=0;ii<4;ii++) {
+                System.out.print(pointer[ii]);
+                System.out.print(connection[ii]);
+            }
+            System.out.println();
         }
+
 
         //점수 계산
         System.out.println(score());
@@ -76,14 +82,20 @@ public class bj14891 {
 
     public static void rotate(int wheelNum, int dir) {
         for (int i = 0; i < 4; i++) {
-            if ((i + wheelNum) % 2 == 0 && connection[i]) {
+            if (i == wheelNum) {
                 pointer[i] = (pointer[i] + dr[dir + 1]) % 8;
-            }
-            if ((i + wheelNum) % 2 == 1 && connection[i]) {
+            } else if ((i + wheelNum) % 2 == 0 && connection[i]) {
+                pointer[i] = (pointer[i] + dr[dir + 1]) % 8;
+            } else if ((i + wheelNum) % 2 == 1 && connection[i]) {
                 pointer[i] = (pointer[i] + reverseDr[dir + 1]) % 8;
             }
+
         }
     }
+//    //회전방향{반시계, 안씀, 시계}
+//    private static int[] dr = {1, 0, 7};
+//    //이웃한 톱니바퀴 리버스 회전방향
+//    private static int[] reverseDr = {7, 0, 1};
 
     public static int score() {
         int score = 0;

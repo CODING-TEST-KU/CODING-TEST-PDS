@@ -69,8 +69,8 @@ public class bj14891_ver2 {
     }
 
     public static void rotate(int wheelNum, int dir) {
-        int[] dirArr = new int[4];        // 각 기어의 최종 회전 방향
-        dirArr[wheelNum] = dir;           // 시작 기어는 무조건 회전
+        int[] dirArr = new int[4];
+        dirArr[wheelNum] = dir;           // 시작 기어 회전
 
         // 오른쪽 전파
         for (int i = wheelNum; i < 3 && connection[i]; i++)

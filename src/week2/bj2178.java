@@ -45,6 +45,7 @@ public class bj2178 {
             int y = now[1];
             int count = now[2];
 
+            //종료조건
             if (x == n - 1 && y == m - 1) {
                 System.out.println(count);
                 return;

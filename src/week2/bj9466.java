@@ -41,7 +41,7 @@ public class bj9466 {
         int next = numbers[now];
         if (!done[next] && !visited[next]) {
             team(next);
-        } else if (!done[next] && visited[next]) {
+        } else if (!done[next] && visited[next]) {//자기자신과 팀인경우 next==now가 되어 포함
             //사이클 발견한 경우
             int temp = next;
             while (temp != now) {
