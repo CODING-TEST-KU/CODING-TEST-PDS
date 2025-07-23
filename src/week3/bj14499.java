@@ -95,7 +95,7 @@ public class bj14499 {
             dice[5] = map[x][y];
             map[x][y] = 0;
         }
-
+//상(0),동(1),서(2),북(3),남(4),하(5)
         System.out.println(dice[0]);
     }
 }
