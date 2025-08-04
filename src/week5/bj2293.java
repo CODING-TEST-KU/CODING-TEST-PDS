@@ -26,9 +26,9 @@ public class bj2293 {
         }
 
         //dp 채우기
-        //순서 고려하지 않기 위해 동전 기준으로 먼저 loop를 돌려야 한다.
+        //**순서 고려하지 않기 위해 동전 기준으로 먼저 loop를 돌려야 한다.
         for (int coin : coins) {
-            //모든 coin에 대해 dp[(목적 숫자 -코인 크기)]+1을 더한다.
+            //모든 coin에 대해 dp[(목적 숫자 -코인 크기)]을 더한다.
             for (int i = 1; i <= k; i++) {
                 if (i >= coin) {
                     dp[i] += dp[i - coin];
