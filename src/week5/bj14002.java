@@ -40,12 +40,14 @@ public class bj14002 {
 
         int max_index = 0;
 
+        // 인덱스 저장
         for (int i = 0; i < n; i++) {
             if (dp[max_index] < dp[i]) {
                 max_index = i;
             }
         }
 
+        //개수 출력
         System.out.println(dp[max_index]);
 
         Stack<Integer> answer = new Stack<>();
@@ -59,6 +61,7 @@ public class bj14002 {
             }
         }
 
+        //수열 출력
         while(!answer.isEmpty()){
             System.out.print(answer.pop()+" ");
         }
