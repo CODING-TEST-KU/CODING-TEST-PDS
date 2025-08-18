@@ -42,6 +42,7 @@ public class bj14503 {
             if (checkDirty(r, c)) {
                 //청소할 칸 있는 경우
                 for (int i = 0; i < 4; i++) {
+                    //반시계방향으로 회전
                     d = (d + 3) % 4;
                     int nr =r+ dr[d];
                     int nc =c+ dc[d];
@@ -51,7 +52,6 @@ public class bj14503 {
                         break;
                     }
                 }
-
             } else {
                 //청소할 칸 없는 경우
                 int backDir = (d + 2) % 4;
