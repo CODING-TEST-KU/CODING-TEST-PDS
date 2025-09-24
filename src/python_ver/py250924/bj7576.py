@@ -1,4 +1,5 @@
 from collections import deque
+import sys
 
 m,n=map(int,input().split())
 tomatos=[list(map(int, input().split())) for _ in range(n)]
@@ -32,7 +33,7 @@ for line in tomatos:
     for tomato in line:
         if tomato==0:
             print(-1)
-            exit(1)
+            sys.exit(0)
         max_tom=max(max_tom, tomato)
 
 if max_tom==1:
