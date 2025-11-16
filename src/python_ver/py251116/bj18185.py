@@ -9,6 +9,12 @@ a = list(map(int, input().split()))
 cost = 0
 
 for i in range(n - 2):
+
+    if a[i + 1] > a[i + 2]:
+        pre_two = min(a[i], a[i + 1] - a[i + 2])
+        cost += pre_two * 5
+        a[i], a[i + 1] = a[i] - pre_two, a[i + 1] - pre_two
+
     three = min(a[i], a[i + 1], a[i + 2])
     if three > 0:
         cost += three * 7
@@ -22,7 +28,7 @@ for i in range(n - 1):
 
 for i in range(n):
     if a[i] > 0:
-        cost += a[i]*3
+        cost += a[i] * 3
         a[i] = 0
 
 print(cost)
