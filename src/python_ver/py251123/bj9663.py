@@ -1,5 +1,7 @@
 import sys
 
+#여기 readline()으로 적으면 함수가 호출되어 문자열을 반환한다.
+# 함수대입을 하고 싶다면 ()가 없이 readline만 적어야 동작함
 input=sys.stdin.readline
 
 n=int(input())
