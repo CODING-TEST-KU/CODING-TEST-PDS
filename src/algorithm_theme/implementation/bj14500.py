@@ -21,14 +21,11 @@ dc = [1, 0, -1, 0]
 visit = [[False] * m for _ in range(n)]
 
 
-def backtrack(r, c, block):
+def dfs(r, c, depth, s):
     global result
 
-    if len(block) == 4:
-        this_sum = 0
-        for sr, sc in block:
-            this_sum += nums[sr][sc]
-        result = max(result, this_sum)
+    if depth == 4:
+        result = max(result, s)
         return
 
     for i in range(4):
@@ -40,9 +37,7 @@ def backtrack(r, c, block):
             continue
 
         visit[nr][nc] = True
-        block.append((nr, nc))
-        backtrack(nr, nc, block)
-        block.pop()
+        dfs(nr, nc, depth+1, s+nums[nr][nc])
         visit[nr][nc] = False
 
 
@@ -51,7 +46,7 @@ def find_max(r, c):
     # DFS 경로로 만들 수 있는 모양
     visit[r][c] = True
     block = [(r, c)]
-    backtrack(r, c, block)
+    dfs(r, c, 1, nums[r][c])
     visit[r][c] = False
 
     # ㅗ 모양 예외처리
