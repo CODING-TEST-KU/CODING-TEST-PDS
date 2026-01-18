@@ -6,55 +6,71 @@
 # 즉 ㅗ 형태와 ㅜ 형태는 dfs로 갈 수 없으므로 예외처리를 해주어야한다.
 
 import sys
-import collections
 
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
 
-nums = [list(map(int, input().split)) for _ in range(n)]
+nums = [list(map(int, input().split())) for _ in range(n)]
 
 result = 0
 
 dr = [0, 1, 0, -1]
 dc = [1, 0, -1, 0]
 
-visit = [[False for _ in range(m)] for _ in range(n)]
+visit = [[False] * m for _ in range(n)]
 
 
 def backtrack(r, c, block):
+    global result
+
     if len(block) == 4:
         this_sum = 0
         for sr, sc in block:
             this_sum += nums[sr][sc]
-        return this_sum
+        result = max(result, this_sum)
+        return
 
     for i in range(4):
         nr, nc = r + dr[i], c + dc[i]
         # 큐 꼬리의 상하좌우 중 visit이 아니며, 범위에 있는 경우 큐에 넣기
-        if visit[nr][nc] or nr < 0 or nr >= n or nc < 0 or nc > m or (nr, nc) in block:
+        if nr < 0 or nr >= n or nc < 0 or nc >= m:
+            continue
+        if visit[nr][nc]:
             continue
 
+        visit[nr][nc] = True
         block.append((nr, nc))
         backtrack(nr, nc, block)
         block.pop()
+        visit[nr][nc] = False
 
 
-def find_max(r, c, nums):
-    global result, visit
-    # 현재 위치를 큐에 넣고 visit처리
-    # 백트래킹
-    found_max = 0
+def find_max(r, c):
+    global result
+    # DFS 경로로 만들 수 있는 모양
+    visit[r][c] = True
     block = [(r, c)]
-    # 여기서 블록 4개를 다채우기
-    q = []
+    backtrack(r, c, block)
+    visit[r][c] = False
 
+    # ㅗ 모양 예외처리
+    center = nums[r][c]
+    arms = []
+    for i in range(4):
+        nr, nc = r + dr[i], c + dc[i]
+        if 0 <= nr < n and 0 <= nc < m:
+            arms.append(nums[nr][nc])
 
-    result = max(result, found_max)
+    if len(arms) >= 3:
+        if len(arms) == 4:
+            result = max(result, center + sum(arms) - min(arms))
+        else:
+            result = max(result, center + sum(arms))
 
 
 for x in range(n):
     for y in range(m):
-        find_max(x, y, nums)
+        find_max(x, y)
 
 print(result)
