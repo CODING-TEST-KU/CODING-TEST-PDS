@@ -45,7 +45,6 @@ def find_max(r, c):
     global result
     # DFS 경로로 만들 수 있는 모양
     visit[r][c] = True
-    block = [(r, c)]
     dfs(r, c, 1, nums[r][c])
     visit[r][c] = False
 
