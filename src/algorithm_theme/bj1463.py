@@ -1,24 +1,16 @@
 x = int(input())
 
-# 3으로 나누었을때 나머지가 0 -> 3으로 나눔
-# 3으로 나누었을때 나머지가 1 -> 짝수인 경우 (10) ->5
-# -> 홀수인 경우 (7)
-# --> 모든 경우에 1을 빼고 3으로 나눔
+# dp 사용 - bottom up 방식
+dp = [0,0,1,1]
 
-# 3으로 나누었을때 나머지가 2 -> 짝수인 경우 (8) -> 2로 나눔 -> 1 빼는 루트
-#                         -> 홀수인 경우 (11) -> 1 빼기
-
-count = 0
-while x != 1:
-    if x % 3 == 0:
-        x = x // 3
-    elif x % 3 == 1:
-        x = x - 1
+for i in range(4, x+1):
+    if i % 3 == 0 and i % 2 == 0:
+        dp.append(min(dp[i - 1], dp[i // 3], dp[i // 2]) + 1)
+    elif i % 3 == 0:
+        dp.append(min(dp[i - 1], dp[i // 3]) + 1)
+    elif i % 2 == 0:
+        dp.append(min(dp[i - 1], dp[i // 2]) + 1)
     else:
-        if x % 2 == 0:
-            x = x // 2
-        else:
-            x = x - 1
+        dp.append(dp[i-1]+1)
 
-    count = count + 1
-print(count)
+print(dp[x])
