@@ -3,48 +3,21 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-house = []
 
-# 1:빨강 / 2:초록 / 3:파랑
-house_color = [0] * n
-for _ in range(n):
-    house.append(list(map(int, input().split())))
+max_val = n * 1000
+# dp 해당 집의 해당 색을 칠한 경우의 최소비용[빨(0), 초(1), 파(2)]
+dp = [[max_val, max_val, max_val] for _ in range(n + 1)]
 
-# dp는 지금까지 만들 수 있는 최소의 비용
-dp = [0] * (n + 1)
+cost = []
+cost.append([max_val, max_val, max_val])
+for i in range(n):
+    cost.append(list(map(int, input().split())))
 
-# if house[0][2] < house[0][3]:
-#     dp[0] = house[0][2]
-#     house_color[0] = 2
-# elif house[0][2] > house[0][3]:
-#     dp[0] = house[0][3]
-#     house_color[0] = 3
-# else:
-#     if house[1][2] > house[1][3]:
-#         dp[0] = house[0][2]
-#         house_color[0] = 2
-#     else:
-#         dp[0] = house[0][3]
-#         house_color[0] = 3
+dp[1][0], dp[1][1], dp[1][2] = cost[1][0], cost[1][1], cost[1][2]
 
-for i in range(1,n):
-    # 두단계 이전부터 보면 됨
+for i in range(2, n + 1):
+    dp[i][0] = min(dp[i - 1][1], dp[i - 1][2]) + cost[i][0]
+    dp[i][1] = min(dp[i - 1][0], dp[i - 1][2]) + cost[i][1]
+    dp[i][2] = min(dp[i - 1][0], dp[i - 1][1]) + cost[i][2]
 
-    # A B C D E ->
-    # 1 2 1 1 1
-    # a에서
-    chosen = house_color[i - 1]
-    if chosen == 1:
-        if house[i][2] < house[i][3]:
-            dp[i] = dp[i - 1] + house[i][2]
-            house_color[i] = 2
-        elif house[i][2] > house[i][3]:
-            dp[i] = dp[i - 1] + house[i][3]
-            house_color[i] = 3
-        else:
-            if house[i + 1][2] > house[i + 1][3]:
-                dp[i] = dp[i - 1] + house[i][2]
-                house_color[i] = 2
-            else:
-                dp[i] = dp[i - 1] + house[i][3]
-                house_color[i] = 3
+print(min(dp[n][0],dp[n][1],dp[n][2]))
